@@ -64,20 +64,6 @@ public class Canvas {
      */
     public void drawLine(Line line) {
 
-        if(Math.abs(line.getY1()) < Math.abs(line.getX1())) {
-            if(line.getX2() < line.getX1()) {
-                float temp = line.getX1();
-                line.setX1(line.getX2());
-                line.setX2(temp);
-            }
-            else {
-                if(line.getY2() < line.getY1()) {
-                    float temp = line.getY1();
-                    line.setY1(line.getY2());
-                    line.setY2(temp);
-                }
-            }
-        }
         //Když je víc svislá než vodorovná
         if(line.getK() > 1) {
             for (float y = line.getY1(); y < line.getY2(); y++) {
@@ -86,7 +72,7 @@ public class Canvas {
             }
         }
         else {
-            if(line.getK() != 0) {
+            if(line.getK() != 0 || line.getY2() - line.getY1() == 0) {
                 for (float x = line.getX1(); x < line.getX2(); x++) {
                     int y = Math.round(line.getK()*x+ line.getQ());
                     img.setRGB((int)x,y,line.getColor());
@@ -116,7 +102,15 @@ public class Canvas {
 
     public void start() {
         clear();
-        drawLine(new Line(0,0,0,500));
+        /*drawLine(new Line(200,200,100,100));
+        drawLine(new Line(100,200,300,200));
+        drawLine(new Line(200,100,200,300));
+        drawLine(new Line(200,200,300,100));
+        drawLine(new Line(200,200,300,300));
+        drawLine(new Line(200,200,100,300));
+
+        drawLine(new Line(200,300,100,200));*/
+        drawLine(new Line(100, 100, 110,200));
         panel.repaint();
     }
 }
