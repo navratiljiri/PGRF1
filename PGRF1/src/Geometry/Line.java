@@ -41,13 +41,14 @@ public class Line {
     }
 
     private void calculateLine() {
-            if (x2 < x1) {
-                swampXValues();
-            } else {
-                if (y2 < y1) {
-                    swampYValues();
-                }
+        //if(Math.abs(y2-y1) < Math.abs(x2-x1)) {
+        if (x2 < x1) {
+            swampXValues();
+        } else {
+            if (y2 < y1) {
+                swampYValues();
             }
+        }
     }
 
     private void swampXValues() {
