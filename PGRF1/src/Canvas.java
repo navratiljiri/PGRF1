@@ -1,16 +1,18 @@
+import Geometry.Line;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public class Canvas {
-
     private JFrame frame;
     private JPanel panel;
     private BufferedImage img;
 
-    public Canvas(int width, int height) {
+    public Canvas(int width, int height)  {
         frame = new JFrame();
-
         frame.setLayout(new BorderLayout());
         frame.setTitle("Canvas");
         frame.setResizable(false);
@@ -24,32 +26,49 @@ public class Canvas {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 present(g);
+                showInstructions();
             }
         };
         panel.setPreferredSize(new Dimension(width, height));
         frame.add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
         frame.pack();
+
+        frame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ESCAPE -> System.exit(0);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
     }
 
-    public void present(Graphics g) {
-        g.drawImage(img, 0, 0, null);
+    private void showInstructions() {
+        Graphics text = img.getGraphics();
+        text.drawString("Close: Esc", img.getWidth() - 80, img.getHeight() - 10);
     }
 
+    /**
+     * Render Line
+     * @param line
+     */
     public void drawLine(Line line) {
-
-        float k = 0;
-
-        if(line.getX2() - line.getX1() != 0) {
-            k = (line.getY2() - line.getY1()) / (line.getX2() - line.getX1()); //Sklon
-        }
-        float q = line.getY1() - k * line.getX1(); // Posunutí
 
         if(Math.abs(line.getY1()) < Math.abs(line.getX1())) {
             if(line.getX2() < line.getX1()) {
-              float temp = line.getX1();
-              line.setX1(line.getX2());
-              line.setX2(temp);
+                float temp = line.getX1();
+                line.setX1(line.getX2());
+                line.setX2(temp);
             }
             else {
                 if(line.getY2() < line.getY1()) {
@@ -59,18 +78,17 @@ public class Canvas {
                 }
             }
         }
-
         //Když je víc svislá než vodorovná
-        if(k > 1) {
+        if(line.getK() > 1) {
             for (float y = line.getY1(); y < line.getY2(); y++) {
-                int x = Math.round((y-q) / k);
+                int x = Math.round((y-line.getQ()) / line.getK());
                 img.setRGB(x,(int)y,line.getColor());
             }
         }
         else {
-            if(k != 0) {
+            if(line.getK() != 0) {
                 for (float x = line.getX1(); x < line.getX2(); x++) {
-                    int y = Math.round(k*x+q);
+                    int y = Math.round(line.getK()*x+ line.getQ());
                     img.setRGB((int)x,y,line.getColor());
                 }
             }
@@ -81,16 +99,14 @@ public class Canvas {
             }
         }
     }
-    public void draw(int color) {
-        for (int x = 0; x < 100; x++) {
-            img.setRGB(x,50, color);
-            img.setRGB(50,x, 0xffff11);
-            img.setRGB(x,x, 0x11ffff);
-        }
-        for (int y = 100; y > 0; y--) {
-            img.setRGB(y,100-y, 0x11ff11);
-        }
+
+    public void present(Graphics g) {
+        g.drawImage(img, 0, 0, null);
     }
+
+    /**
+     * Clear area
+     */
 
     public void clear() {
         Graphics g = img.getGraphics();
@@ -100,17 +116,7 @@ public class Canvas {
 
     public void start() {
         clear();
-        drawLine(new Line(100,10,100,500));
-        //drawLine(new Line(100,20,40,100, 0xff00000));
+        drawLine(new Line(0,0,0,500));
         panel.repaint();
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Canvas(800, 600).start();
-            }
-        });
     }
 }

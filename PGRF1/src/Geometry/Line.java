@@ -1,8 +1,19 @@
+package Geometry;
+
 public class Line {
     private float x2;
     private float y2;
     private float x1;
     private float y1;
+
+    /**
+     * Inclination
+     */
+    private float k = 0;
+    /**
+     * Shift
+     */
+    private float q = 0;
 
     private int color = 0xffffff;
 
@@ -11,6 +22,9 @@ public class Line {
         this.y2 = y2;
         this.x1 = x1;
         this.y1 = y1;
+
+        calculateInclination();
+        calculateShift();
     }
 
     public Line(float x2, float y2, float x1, float y1, int color) {
@@ -19,6 +33,17 @@ public class Line {
         this.x1 = x1;
         this.y1 = y1;
         this.color = color;
+
+        calculateInclination();
+        calculateShift();
+    }
+    private void calculateInclination() {
+        if(x2 - x1 != 0) {
+            k = (y2 - y1) / (x2 - x1);
+        }
+    }
+    private void calculateShift() {
+        q = y1 - k * x1;
     }
 
     public int getColor() {
@@ -54,5 +79,13 @@ public class Line {
 
     public void setY1(float y1) {
         this.y1 = y1;
+    }
+
+    public float getK() {
+        return k;
+    }
+
+    public float getQ() {
+        return q;
     }
 }
