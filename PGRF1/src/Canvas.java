@@ -1,4 +1,4 @@
-import Geometry.Line;
+import model.Line;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,32 +58,6 @@ public class Canvas {
         text.drawString("Close: Esc", img.getWidth() - 80, img.getHeight() - 10);
     }
 
-    /**
-     * Render Line
-     *
-     * @param line
-     */
-    public void drawLine(Line line) {
-
-        //Když je víc svislá než vodorovná
-        if (line.getK() > 1) {
-            for (float y = line.getY1(); y < line.getY2(); y++) {
-                int x = Math.round((y - line.getQ()) / line.getK());
-                img.setRGB(x, (int) y, line.getColor());
-            }
-        } else {
-            if (line.getK() != 0 || line.getY2() - line.getY1() == 0) {
-                for (float x = line.getX1(); x < line.getX2(); x++) {
-                    int y = Math.round(line.getK() * x + line.getQ());
-                    img.setRGB((int) x, y, line.getColor());
-                }
-            } else {
-                for (float y = line.getY1(); y < line.getY2(); y++) {
-                    img.setRGB((int) line.getX1(), (int) y, line.getColor());
-                }
-            }
-        }
-    }
 
     public void present(Graphics g) {
         g.drawImage(img, 0, 0, null);
@@ -99,17 +73,5 @@ public class Canvas {
         g.fillRect(0, 0, img.getWidth(), img.getHeight());
     }
 
-    public void start() {
-        clear();
-        /*drawLine(new Line(200,200,100,100));
-        drawLine(new Line(100,200,300,200));
-        drawLine(new Line(200,100,200,300));
-        drawLine(new Line(200,200,300,100));
-        drawLine(new Line(200,200,300,300));
-        drawLine(new Line(200,200,100,300));
 
-        drawLine(new Line(200,300,100,200));*/
-        drawLine(new Line(100, 100, 110, 200));
-        panel.repaint();
-    }
 }
