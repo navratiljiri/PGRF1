@@ -1,5 +1,6 @@
 package controller;
 
+import model.Line;
 import rasterizer.LineRasterizer;
 import rasterizer.LineRasterizerGraphics;
 import rasterizer.LineRasterizerTrivial;
@@ -19,5 +20,6 @@ public class Controller2D {
 
     public void initObjects(Raster raster) {
         lineRasterizer = new LineRasterizerTrivial(raster);
+        lineRasterizer.rasterize(new Line(100,50,10,0, 0x295396));
     }
 }

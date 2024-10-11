@@ -1,66 +1,46 @@
 package rasterizer;
 
+/**
+ * Vykreslení za pomoci triviálního algoritmu
+ */
 public class LineRasterizerTrivial extends LineRasterizer {
 
     public LineRasterizerTrivial(Raster raster) {
         super(raster);
     }
+    private int changeAxis(double delta, int position1, int position2) {
+        return delta < 0 ? position1 : position2;
+    }
 
     @Override
     protected void drawLine(int x1, int y1, int x2, int y2) {
-        // TODO: dokončit triviální algoritmus
 
-        double k = 0;
+        double dx = (x2-x1);
+        double dy = (y2-y1);
 
-        if(x2 - x1 != 0) {
-           k = (double) (y2 - y1) / (x2 - x1);
+        if(dx == 0) {
+            dx = 1;
         }
 
+        double k = dy / dx;
         double q = y1 - k * x1;
-
-        if(Math.abs(y2-y1) < Math.abs(x2-x1)) {
-            if(x2 < x1) {
-                int temp = x1;
-                x1 = x2;
-                x2 = temp;
-
-                temp = y1;
-                y1 = y2;
-                y2 = temp;
-            }
-        }
-        else {
-            if(y2 < y1) {
-                int temp = x1;
-                x1 = x2;
-                x2 = temp;
-
-                temp = y1;
-                y1 = y2;
-                y2 = temp;
-
-            }
-        }
 
         //Když je víc svislá než vodorovná
         if(k > 1) {
-            for (double y = y1; y < y2; y++) {
+            int startY = changeAxis(dy, y2, y1);
+            int endY = changeAxis(dy, y1, y2);
+            for (int y = startY; y < endY; y++) {
                 int x = (int)Math.round((y-q) / k);
-                raster.setPixel(x,(int)y,0x000000);
+                raster.setPixel(x,y,color);
             }
         }
         else {
-            if(k != 0 || y2 - y1 == 0) {
-                for (double x = x1; x < x2; x++) {
+            int startX = changeAxis(dx, x2, x1);
+            int endX = changeAxis(dx, x1, x2);
+                for (int x = startX; x < endX; x++) {
                     int y = (int)Math.round(k*x+q);
-                    raster.setPixel((int)x,y,0x000000);
+                    raster.setPixel(x,y,this.color);
                 }
-            }
-            else {
-                for (float y = y1; y < y2; y++) {
-                    raster.setPixel(x1,(int)y,0x000000);
-                }
-            }
         }
     }
 }
