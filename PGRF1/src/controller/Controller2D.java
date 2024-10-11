@@ -20,6 +20,6 @@ public class Controller2D {
 
     public void initObjects(Raster raster) {
         lineRasterizer = new LineRasterizerTrivial(raster);
-        lineRasterizer.rasterize(new Line(100,50,10,0, 0x295396));
+        lineRasterizer.rasterize(new Line(100,150,100,10, 0x295396));
     }
 }

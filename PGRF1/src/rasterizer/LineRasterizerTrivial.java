@@ -26,7 +26,7 @@ public class LineRasterizerTrivial extends LineRasterizer {
         double q = y1 - k * x1;
 
         //Když je víc svislá než vodorovná
-        if(k > 1) {
+        if(Math.abs(k) > 1) {
             int startY = changeAxis(dy, y2, y1);
             int endY = changeAxis(dy, y1, y2);
             for (int y = startY; y < endY; y++) {
