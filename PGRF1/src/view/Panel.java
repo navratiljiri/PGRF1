@@ -31,4 +31,5 @@ public class Panel extends JPanel {
     public RasterBufferedImage getRasterImage() {
         return rasterImage;
     }
+
 }

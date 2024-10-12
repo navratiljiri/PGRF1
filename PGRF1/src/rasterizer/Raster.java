@@ -13,6 +13,6 @@ public interface Raster {
 
    int getWidth();
 
-   int setWidth();
+   int getHeight();
 
 }

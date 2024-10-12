@@ -1,25 +1,32 @@
 package controller;
 
+import listeners.MouseListener;
+import listeners.MouseMotionListener;
 import model.Line;
-import rasterizer.LineRasterizer;
-import rasterizer.LineRasterizerGraphics;
-import rasterizer.LineRasterizerTrivial;
-import rasterizer.Raster;
+import rasterizer.*;
 import view.Panel;
 
 public class Controller2D {
     private final Panel panel;
     private LineRasterizer lineRasterizer;
+    private MouseListener mouseListener;
+    private MouseMotionListener mouseMotionListener;
 
     public Controller2D(Panel panel) {
         this.panel = panel;
-
         initObjects(panel.getRasterImage());
-        //init listeners
+        initListeners();
     }
 
     public void initObjects(Raster raster) {
-        lineRasterizer = new LineRasterizerTrivial(raster);
-        lineRasterizer.rasterize(new Line(100,150,100,10, 0x295396));
+        lineRasterizer = new LineRasterizerDDA(raster);
+    }
+    public void initListeners() {
+        /*mouseListener = new MouseListener(lineRasterizer, panel);
+        panel.addMouseListener(mouseListener);*/
+
+        mouseMotionListener = new MouseMotionListener(panel, lineRasterizer);
+        panel.addMouseListener(mouseMotionListener);
+        panel.addMouseMotionListener(mouseMotionListener);
     }
 }

@@ -6,10 +6,13 @@ import java.awt.image.BufferedImage;
 public class RasterBufferedImage implements Raster {
 
     private final BufferedImage image;
+    private final BufferedImage imagePredicted;
     private int color;
+    int x,y;
 
     public RasterBufferedImage(int width, int height) {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        imagePredicted = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
     public void draw(RasterBufferedImage raster) {
@@ -21,6 +24,9 @@ public class RasterBufferedImage implements Raster {
 
     public void repaint(Graphics g) {
         g.drawImage(image, 0, 0, null);
+        g.setColor(Color.white);
+        g.drawString("X [ "+x+" ]", 10, 20);
+        g.drawString("Y [ "+y+" ]", 10, 30);
     }
 
     @Override
@@ -30,7 +36,7 @@ public class RasterBufferedImage implements Raster {
 
     @Override
     public void setPixel(int x, int y, int color) {
-        image.setRGB(x,y,color);
+            image.setRGB(x,y,color);
     }
 
     @Override
@@ -53,11 +59,23 @@ public class RasterBufferedImage implements Raster {
     }
 
     @Override
-    public int setWidth() {
+    public int getHeight() {
         return image.getHeight();
     }
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public void createImagePrediction() {
+        imagePredicted.setData(image.getData());
+    }
+    public void setImagePredictionToImage() {
+        image.setData(imagePredicted.getData());
+    }
+
+    public void setCoordinator(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
