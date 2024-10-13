@@ -1,15 +1,14 @@
 package controller;
 
-import listeners.MouseListener;
+import listeners.KeyEvents;
 import listeners.MouseMotionListener;
-import model.Line;
 import rasterizer.*;
 import view.Panel;
 
 public class Controller2D {
     private final Panel panel;
     private LineRasterizer lineRasterizer;
-    private MouseListener mouseListener;
+    private KeyEvents keyEvents;
     private MouseMotionListener mouseMotionListener;
 
     public Controller2D(Panel panel) {
@@ -19,14 +18,15 @@ public class Controller2D {
     }
 
     public void initObjects(Raster raster) {
-        lineRasterizer = new LineRasterizerDDA(raster);
+        lineRasterizer = new LineRasterizerBresenham(raster);
     }
     public void initListeners() {
-        /*mouseListener = new MouseListener(lineRasterizer, panel);
-        panel.addMouseListener(mouseListener);*/
-
         mouseMotionListener = new MouseMotionListener(panel, lineRasterizer);
+        keyEvents = new KeyEvents(panel);
+
+        panel.addKeyListener(keyEvents);
         panel.addMouseListener(mouseMotionListener);
         panel.addMouseMotionListener(mouseMotionListener);
+
     }
 }
