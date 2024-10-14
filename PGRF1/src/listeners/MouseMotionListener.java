@@ -30,6 +30,7 @@ public class MouseMotionListener extends MouseAdapter {
     @Override
     public void mouseReleased(MouseEvent e) {
         lineRasterizer.rasterize(new Line(x,y,x2,y2, 0x5D2B68));
+
         /*int thickness = 6;
         for (int i = -thickness / 2; i <= thickness / 2; i++) {
             lineRasterizer.rasterize(new Line(x+i,y,x2+i,y2, 0x5D2B68));
@@ -44,6 +45,7 @@ public class MouseMotionListener extends MouseAdapter {
         y2 = e.getY();
         panel.getRasterImage().setImagePredictionToImage();
         lineRasterizer.rasterize(new Line(x,y,x2,y2, 0x5D2B68));
+
         /*int thickness = 6;
         for (int i = -thickness / 2; i <= thickness / 2; i++) {
             lineRasterizer.rasterize(new Line(x+i,y,x2+i,y2, 0x5D2B68));
