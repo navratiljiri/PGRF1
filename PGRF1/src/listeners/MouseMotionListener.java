@@ -35,21 +35,10 @@ public class MouseMotionListener extends MouseAdapter {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        panel.getRasterImage().setImagePredictionToImage();
         x2 = e.getX();
         y2 = e.getY();
-        if (x2 < 1) {
-            x2 = 1;
-        }
-        if (x2 > panelWidth) {
-            x2 = panelWidth;
-        }
-        if (y2 < 1) {
-            y2 = 1;
-        }
-        if (y2 > panelHeight) {
-            y2 = panelHeight;
-        }
+        panel.getRasterImage().setImagePredictionToImage();
+
         lineRasterizer.rasterize(new Line(x,y,x2,y2, 0xff00000));
         panel.getRasterImage().setCoordinator(x2, y2);
         panel.repaint();

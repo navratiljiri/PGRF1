@@ -18,7 +18,7 @@ public class Controller2D {
     }
 
     public void initObjects(Raster raster) {
-        lineRasterizer = new LineRasterizerBresenham(raster);
+        lineRasterizer = new LineRasterizerDDA(raster);
     }
     public void initListeners() {
         mouseMotionListener = new MouseMotionListener(panel, lineRasterizer);

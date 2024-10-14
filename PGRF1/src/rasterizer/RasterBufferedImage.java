@@ -36,7 +36,10 @@ public class RasterBufferedImage implements Raster {
 
     @Override
     public void setPixel(int x, int y, int color) {
-            image.setRGB(x,y,color);
+        if (x < 1 || x > image.getWidth() -1 || y < 1 || y > image.getHeight()-1) {
+            return;
+        }
+        image.setRGB(x,y,color);
     }
 
     @Override

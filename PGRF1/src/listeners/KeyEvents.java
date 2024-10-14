@@ -21,7 +21,6 @@ public class KeyEvents implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_C:
                 panel.clear(0x000000);
-                panel.repaint();
                 break;
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
