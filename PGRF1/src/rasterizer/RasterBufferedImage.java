@@ -1,5 +1,7 @@
 package rasterizer;
 
+import view.Help;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -81,4 +83,5 @@ public class RasterBufferedImage implements Raster {
         this.x = x;
         this.y = y;
     }
+
 }

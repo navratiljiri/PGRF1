@@ -8,7 +8,7 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             try {
                 Frame frame = new Frame();
-                new Controller2D(frame.getPanel());
+                new Controller2D(frame.getPanel(), frame.getHelp());
             } catch (Exception e){
                 System.out.println("GUI ERROR: "+e);
             }
