@@ -22,7 +22,7 @@ public class Panel extends JPanel {
 
     public void clear(int color) {
         rasterImage.setClearColor(color);
-        rasterImage.clear();
+        //rasterImage.clear();
     }
 
     public RasterBufferedImage getRasterImage() {

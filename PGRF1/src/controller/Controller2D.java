@@ -45,8 +45,8 @@ public class Controller2D {
     }
 
     public void initListeners() {
-        mouseMotionListener = new MouseMotionListener(panel, lineRasterizer, polygonRasterizer, polygon);
         keyEvents = new KeyEvents(panel, helpPanel, this, polygon);
+        mouseMotionListener = new MouseMotionListener(panel, lineRasterizer, polygonRasterizer, polygon, keyEvents);
 
         panel.addKeyListener(keyEvents);
         panel.addMouseListener(mouseMotionListener);

@@ -16,6 +16,8 @@ public class KeyEvents implements KeyListener {
     Controller2D controller2D;
     Polygon polygon;
 
+    boolean shiftActivated = false;
+
     public KeyEvents(Panel panel, Help helpPanel, Controller2D controller2D, Polygon polygon) {
         this.panel = panel;
         this.helpPanel = helpPanel;
@@ -34,9 +36,13 @@ public class KeyEvents implements KeyListener {
             case KeyEvent.VK_C:
                 polygon.clearPolygon();
                 panel.clear(0x000000);
+                panel.repaint();
                 break;
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
+                break;
+            case KeyEvent.VK_SHIFT:
+                shiftActivated = true;
                 break;
             case KeyEvent.VK_A:
                 int value = helpPanel.getSelectedAlgoritm();
@@ -51,12 +57,19 @@ public class KeyEvents implements KeyListener {
 
                 controller2D.changeAlgorithms();
                 break;
-
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_SHIFT:
+                shiftActivated = false;
+                break;
+        }
+    }
 
+    public boolean isShiftActivated() {
+        return shiftActivated;
     }
 }

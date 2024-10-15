@@ -20,7 +20,8 @@ public class Help extends JPanel {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 14));
         g.drawString("Smazat plochu [c]",column1,  20);
         g.drawString("Změnit algoritmus [a] - " + Algorithms.values()[selectedAlgoritm],column1, 40);
-        g.drawString("Zavřít okno [esc]",  column1, 60);
+        g.drawString("Kreslit přímou či diagonální úsečku [držet shift]", column1, 60);
+        g.drawString("Zavřít okno [esc]",  column1, 80);
     }
 
     public int getSelectedAlgoritm() {
