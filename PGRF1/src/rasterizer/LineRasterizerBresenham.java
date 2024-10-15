@@ -33,7 +33,5 @@ public class LineRasterizerBresenham  extends LineRasterizer{
                 y++;
             }
         }
-
-
     }
 }

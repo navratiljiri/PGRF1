@@ -14,13 +14,10 @@ public class Panel extends JPanel {
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         rasterImage = new RasterBufferedImage(WIDTH,HEIGHT);
         rasterImage.setClearColor(Color.BLACK.getRGB());
-        //load image
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         rasterImage.repaint(g);
-        //rasterImage.addGui(g);
-        //image repaint
     }
 
     public void clear(int color) {

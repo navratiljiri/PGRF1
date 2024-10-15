@@ -2,6 +2,8 @@ package listeners;
 
 import controller.Controller2D;
 import enums.Algorithms;
+import model.Polygon;
+import rasterizer.PolygonRasterizer;
 import view.Help;
 import view.Panel;
 
@@ -12,11 +14,13 @@ public class KeyEvents implements KeyListener {
     Panel panel;
     Help helpPanel;
     Controller2D controller2D;
+    Polygon polygon;
 
-    public KeyEvents(Panel panel, Help helpPanel, Controller2D controller2D) {
+    public KeyEvents(Panel panel, Help helpPanel, Controller2D controller2D, Polygon polygon) {
         this.panel = panel;
         this.helpPanel = helpPanel;
         this.controller2D = controller2D;
+        this.polygon = polygon;
     }
 
     @Override
@@ -28,6 +32,7 @@ public class KeyEvents implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_C:
+                polygon.clearPolygon();
                 panel.clear(0x000000);
                 break;
             case KeyEvent.VK_ESCAPE:
