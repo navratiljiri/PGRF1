@@ -11,19 +11,19 @@ public class PolygonRasterizer {
         this.lineRasterizer = lineRasterizer;
     }
 
-    public void rasterize(Polygon polygon) {
+    public void rasterize(Polygon polygon, int bold) {
         if (polygon.getSize() < 3) {
             return;
         }
         Point pointA, pointB;
         for (int i = 0; i < polygon.getSize(); i++) {
             pointA = polygon.getPoint(i);
-            if (i + 1 == polygon.getSize()) {
+            if (i == polygon.getSize() - 1) {
                 pointB = polygon.getPoint(0);
             } else {
                 pointB = polygon.getPoint(i + 1);
             }
-            lineRasterizer.rasterize(new Line(pointA, pointB, 0xffffff));
+            lineRasterizer.rasterize(new Line(pointA, pointB, 0xffffff), bold);
         }
     }
 

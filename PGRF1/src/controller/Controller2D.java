@@ -40,17 +40,32 @@ public class Controller2D {
             case 1:
                 lineRasterizer = new LineRasterizerDDA(raster);
                 break;
+            case 2:
+                lineRasterizer = new LineRasterizerMidpoint(raster);
+                break;
         }
         mouseMotionListener.changeAlgorithm(lineRasterizer);
+        polygonRasterizer.setLineRasterizer(lineRasterizer);
     }
 
     public void initListeners() {
-        keyEvents = new KeyEvents(panel, helpPanel, this, polygon);
+        keyEvents = new KeyEvents(panel, helpPanel, this);
         mouseMotionListener = new MouseMotionListener(panel, lineRasterizer, polygonRasterizer, polygon, keyEvents);
 
         panel.addKeyListener(keyEvents);
         panel.addMouseListener(mouseMotionListener);
         panel.addMouseMotionListener(mouseMotionListener);
+    }
 
+    public LineRasterizer getLineRasterizer() {
+        return lineRasterizer;
+    }
+
+    public PolygonRasterizer getPolygonRasterizer() {
+        return polygonRasterizer;
+    }
+
+    public Polygon getPolygon() {
+        return polygon;
     }
 }

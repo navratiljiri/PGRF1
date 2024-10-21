@@ -30,4 +30,5 @@ public class Frame extends JFrame {
     public Help getHelp() {
         return help;
     }
+
 }

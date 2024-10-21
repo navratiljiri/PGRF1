@@ -1,8 +1,9 @@
 package rasterizer;
 
 /**
- * Bresenhamův algoritumus
- * Výhody - Nepoužívá plovoucí čárku, dělení
+ * Bresenhamův algoritumus - pouze zatím pro jeden kvadrant
+ * Výhody - Nepoužívá plovoucí čárku a dělení, efektivní
+ * Nevýhody - Komplikovanější implementace, specifický pro různé kvadranty
  */
 public class LineRasterizerBresenham  extends LineRasterizer{
     public LineRasterizerBresenham(Raster raster) {
@@ -19,19 +20,20 @@ public class LineRasterizerBresenham  extends LineRasterizer{
         x = x1;
         y = y1;
 
-        prediktor = 2 * dy - dx;
+        prediktor = 2 * (dy - dx);
 
+        raster.setPixel(x,y,0xffffff);
         while(x <= x2) {
-            raster.setPixel(x,y,0xffffff);
             x++;
 
             if(prediktor < 0) {
                 prediktor += 2 * dy;
             }
             else {
-                prediktor += 2 * (dy) - 2 * - dx;
+                prediktor += 2 * (dx - dy);
                 y++;
             }
+            raster.setPixel(x,y,0xffffff);
         }
     }
 }

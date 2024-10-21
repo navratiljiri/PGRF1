@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel extends JPanel {
+
     private RasterBufferedImage rasterImage;
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -22,10 +23,11 @@ public class Panel extends JPanel {
 
     public void clear(int color) {
         rasterImage.setClearColor(color);
-        //rasterImage.clear();
+        rasterImage.clear();
     }
 
     public RasterBufferedImage getRasterImage() {
         return rasterImage;
     }
+
 }
